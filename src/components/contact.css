@@ -1,0 +1,40 @@
+.contact-section {
+    text-align: center;
+    padding: 50px 0;
+  
+    
+  }
+  
+  .contact-form {
+    margin-bottom: 20px;
+  }
+  
+  .contact-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-icons div {
+    margin-bottom: 20px;
+  }
+  
+  .contact-icons i {
+    margin-right: 10px;
+    
+  }
+
+  .backcolour{
+    background-color: rgb(115, 218, 225);
+
+
+  }
+
+
+
+
+
+
+  
+  
+  
