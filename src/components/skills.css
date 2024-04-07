@@ -3,7 +3,6 @@
     width: 80px;
 border-radius: .75rem;
 background-size: cover;
-overflow: hidden;
 border-radius: 2rem;
 margin: 0 10px;
 display: flex;
@@ -12,3 +11,18 @@ transition: .6s cubic-bezier(.28,-0.03,0,.99);
 box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
 padding: 5px 10px;
 }
+
+.skills-container {
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  @media (max-width: 767px) { /* Apply styles for devices smaller than 768px width (mobile devices) */
+    .skills-container {
+      overflow-y:scroll;
+    }
+    .skills-container::-webkit-scrollbar {
+        display: none;
+      }
+    
+  }
+  

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Image, ListGroup } from 'react-bootstrap';
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import './projects.css';
 import project1 from '../images/Screenshot (191).png'; // Import project images
 import project2 from '../images/Screenshot (192).png';
@@ -22,43 +22,34 @@ const projectsData = [
 ];
 
 function Projects() {
-  const [hoveredImage, setHoveredImage] = useState(null);
-
-  const handleMouseEnter = (image) => {
-    setHoveredImage(image);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredImage(null);
-  };
-
   return (
-    <div className='mb-5 mt-2 background4' style={{ width: "100%", height: "95%", borderRadius: '25% 10% ' }}>
-
+    <div className='project-container'>
+      <div className='mb-5 mt-2 background4' style={{ width: "100%", padding: '20px', borderRadius: '25px' }}>
       <Container>
-        <Row>
-          <Col md={4}>
-            <h2 className='mt-3' style={{textAlign:"center",marginLeft:'450px',color:"white"}}>Projects</h2>
-            <ListGroup style={{marginTop:"30px",marginLeft:"50px"}}>
-              {projectsData.map((project, index) => (
-                <ListGroup.Item
-                  key={index}
-                  className="project-item"
-                  onMouseEnter={() => handleMouseEnter(project.image)}
-                  onMouseLeave={handleMouseLeave}
-                  style={{width:"400px"}}
-                >
-                  <a href={project.url} target="_blank"  style={{textDecoration:"none",color:"black"}} rel="noopener noreferrer" className="project-link">{project.name}</a>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+        <Row >
+          <Col xs={12} >
+            <h1 className='mt-3 text-center' style={{ color: "black", fontFamily:"-moz-initial"}}>Projects</h1>
           </Col>
-          <Col md={8}>
-            <Image src={hoveredImage ? hoveredImage :'https://i.pinimg.com/originals/15/bc/1a/15bc1a87577971e7b031a7d7c7140af6.gif'} fluid style={{marginTop:"80px",marginLeft:"100px",borderRadius:"25px", height:"300px",width:"500px"}} />
-          </Col>
+          {projectsData.map((project, index) => (
+            <Col key={index} md={3} sm={6} xs={12} className='mb-3'>
+              <a href={project.url} target="_blank" rel="noopener noreferrer" className="project-link">
+                <Card className="project-card">
+                  <div className="image-container">
+                    <Card.Img variant="top" src={project.image} alt={project.name} />
+                  </div>
+                  <Card.Body>
+                    <Card.Title>{project.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </a>
+            </Col>
+          ))}
         </Row>
       </Container>
     </div>
+
+    </div>
+    
   );
 }
 

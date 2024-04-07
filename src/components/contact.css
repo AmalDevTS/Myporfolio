@@ -1,40 +1,23 @@
-.contact-section {
-    text-align: center;
-    padding: 50px 0;
-  
-    
-  }
-  
-  .contact-form {
-    margin-bottom: 20px;
-  }
-  
-  .contact-icons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .contact-icons div {
-    margin-bottom: 20px;
-  }
-  
-  .contact-icons i {
-    margin-right: 10px;
-    
+.background5{
+  background-image: linear-gradient(to right, #6157ff, #ee49fd);
+}
+
+.contact-container {
+  height: 90vh; /* Adjust the height as needed */
+}
+
+@media (max-width: 767px) {
+  /* Apply styles for devices smaller than 768px width (mobile devices) */
+  .contact-container {
+    overflow-y: scroll; /* Enable scrolling when necessary */
+    height: auto; /* Allow container to expand dynamically */
+    max-height: 90vh; /* Limit maximum height to viewport height */
   }
 
-  .backcolour{
-    background-color: rgb(115, 218, 225);
-
-
+  /* Hide the scrollbar for webkit-based browsers */
+  .contact-container::-webkit-scrollbar {
+    display: none;
   }
+}
 
 
-
-
-
-
-  
-  
-  

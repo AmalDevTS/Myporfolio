@@ -1,15 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './home.css';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
-import image from '../images/happy-3d-cartoon-man-using-laptop-siting-transparent-white-background_973886-51-removebg.png';
+import image from '../images/happy-3d-cartoon-man-using-laptop-siting-transparent-white-background_973886-51-removebg-transformed.png';
 
 function Home() {
+  const [text, setText] = useState('');
+  const [blink, setBlink] = useState(true);
+  const [contentLoaded, setContentLoaded] = useState(false);
+  const introText = "Hi, I am Amal Dev";
+
   useEffect(() => {
-    const elements = document.querySelectorAll('.fadeIn');
-    elements.forEach(element => {
-      element.classList.add('fadeIn');
-    });
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex <= introText.length) {
+        setText(introText.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100); // Adjust typing speed as needed
+
+    // Blink effect
+    const blinkInterval = setInterval(() => {
+      setBlink(prevBlink => !prevBlink);
+    }, 500); // Adjust blinking speed as needed
+
+    // Set content loaded after a delay
+    const timer = setTimeout(() => {
+      setContentLoaded(true);
+    }, 500); // Adjust delay as needed
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(blinkInterval);
+      clearTimeout(timer);
+    };
   }, []);
 
   const handleDownload = () => {
@@ -21,15 +47,17 @@ function Home() {
   };
 
   return (
-    <div className='mb-5 mt-2 background' style={{ width: "100%", height: "80%", borderRadius: '25% 10% ' }}>
-      <div className='container-fluid rounded'>
-        <Row className='align-items-center p-5'>
-          <Col sm={12} md={6} lg={6}>
-            <h2 className=' mb-3 text-fadeIn' style={{ fontSize: "50px", fontWeight: "200", color: "yellow", fontFamily: "Anton, sans-serif" }}>Hi,
-              <span> I am Amal Dev</span></h2>
-            <p className="text-fadeIn" style={{ color: "black", fontSize: "20px" }}>Full Stack Developer</p>
-            <p className="text-fadeIn">As a dedicated learner and aspiring MERN Stack
-              Developer Intern,I am deeply committed about
+    <div className='mb-5 mt-2 background' style={{ width: "100%", height: "auto", padding: '20px', borderRadius: '25px' }}>
+      <div className={`container rounded ${contentLoaded ? 'contentLoaded' : ''}`}>
+        <Row className='align-items-center'>
+          <Col xs={12} md={6}>
+            <h1 className='mb-3 text-fadeIn' style={{ fontSize: "40px", fontWeight: "200", color: "yellow", fontFamily: "Anton, sans-serif" }}>
+              {text}
+              <span style={{ opacity: blink ? 1 : 0, color: "black" }}> |</span>
+            </h1>
+            <p className="text-fadeIn" style={{ color: "black", fontSize: "clamp(1rem, 3vw, 1.5rem)" }}>Full Stack Developer</p>
+            <p className="text-fadeIn" style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>As a dedicated learner and aspiring MERN Full Stack 
+              Developer ,I am deeply committed about
               crafting innovative web solutions. Currently
               honing my skills in MERN (MongoDB, Express.js,
               React.js, Node.js) development, I thrive on
@@ -37,11 +65,13 @@ function Home() {
               growth. Seeking opportunities in the field to apply
               and expand my skills while contributing to
               impactful projects. </p>
-            <button onClick={handleDownload} className='btn rounded button1 fadeIn'>Download C V</button>
-            <Link to='/contacts' className="fadeIn" style={{ textDecoration: "none", color: "black", borderRadius: "25px" }}><button className='btn rounded button1 ms-3'>Hire Me</button></Link>
+            <div>
+              <button onClick={handleDownload} className='btn rounded button1 fadeIn me-3 mt-3'>Download CV</button>
+              <Link to='/contacts' className="fadeIn" style={{ textDecoration: "none", color: "black", borderRadius: "25px" }}><button className='btn rounded button1 mt-3'>Hire Me</button></Link>
+            </div>
           </Col>
-          <Col sm={12} md={6} lg={6}>
-            <img className='images image-fadeIn' src={image} alt="" height={"300px"} style={{ marginTop: "50px", borderRadius: "8px" }} />
+          <Col xs={12} md={6} className="d-none d-md-block">
+            <img className='images image-fadeIn' src={image} alt="" style={{ width: "100%", borderRadius: "8px" }} />
           </Col>
         </Row>
       </div>
